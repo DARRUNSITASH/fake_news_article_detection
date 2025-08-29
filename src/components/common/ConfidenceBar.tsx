@@ -12,7 +12,7 @@ export const ConfidenceBar: React.FC<ConfidenceBarProps> = ({ confidence, predic
   return (
     <div className="w-full">
       <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-gray-700">
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
           Confidence Score
         </span>
         <span className={`text-sm font-bold ${
@@ -21,7 +21,7 @@ export const ConfidenceBar: React.FC<ConfidenceBarProps> = ({ confidence, predic
           {percentage}%
         </span>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-3">
+      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
         <div
           className={`h-3 rounded-full transition-all duration-1000 ease-out ${
             isReal 

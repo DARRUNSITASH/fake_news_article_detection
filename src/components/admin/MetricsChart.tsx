@@ -15,14 +15,14 @@ export const MetricsChart: React.FC<MetricsChartProps> = ({ metrics }) => {
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Model Performance Metrics</h3>
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-300">
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Model Performance Metrics</h3>
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis domain={[0, 100]} />
+          <BarChart data={data} className="dark:text-gray-300">
+            <CartesianGrid strokeDasharray="3 3" className="dark:opacity-30" />
+            <XAxis dataKey="name" className="dark:text-gray-300" />
+            <YAxis domain={[0, 100]} className="dark:text-gray-300" />
             <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Score']} />
             <Bar dataKey="value" fill="#3B82F6" radius={[4, 4, 0, 0]} />
           </BarChart>

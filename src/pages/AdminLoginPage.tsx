@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ThemeToggle } from '../components/common/ThemeToggle';
 import { LoginForm } from '../components/admin/LoginForm';
 import api from '../services/api';
 
@@ -30,5 +31,12 @@ export const AdminLoginPage: React.FC = () => {
     }
   };
 
-  return <LoginForm onLogin={handleLogin} loading={loading} error={error} />;
+  return (
+    <div className="relative">
+      <div className="absolute top-4 right-4 z-10">
+        <ThemeToggle />
+      </div>
+      <LoginForm onLogin={handleLogin} loading={loading} error={error} />
+    </div>
+  );
 };
