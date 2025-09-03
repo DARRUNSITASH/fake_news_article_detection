@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { googleAI } from './aiService';
-import { mlModel } from './mlModel';
 import { NewsArticle, Dataset, ModelMetrics, AdminStats } from '../types';
 
 const API_BASE = '/api';
@@ -9,43 +7,8 @@ export const api = {
   // User endpoints
   async verifyNews(content: string): Promise<NewsArticle> {
     try {
-      // Try AI first, fallback to ML
-      let result;
-      let method: 'AI' | 'ML';
-
-      try {
-        result = await googleAI.analyzeNews(content);
-        method = 'AI';
-      } catch (aiError) {
-        console.warn('AI analysis failed, using ML fallback:', aiError);
-        result = mlModel.predict(content);
-        method = 'ML';
-      }
-
-      // Simulate API call for storing results
-      const newsArticle: NewsArticle = {
-        id: Date.now().toString(),
-        title: 'Analyzed Article',
-        content,
-        prediction: result.prediction,
-        confidence: result.confidence,
-        method,
-        timestamp: new Date()
-      };
-
-      // In a real app, this would be sent to backend
-      try {
-        await axios.post(`${API_BASE}/verify`, {
-          content,
-          prediction: result.prediction,
-          confidence: result.confidence,
-          method
-        });
-      } catch (apiError) {
-        console.warn('Failed to store result in backend:', apiError);
-      }
-
-      return newsArticle;
+      const response = await axios.post(`${API_BASE}/verify`, { content });
+      return response.data;
 
     } catch (error) {
       console.error('Verification failed:', error);
